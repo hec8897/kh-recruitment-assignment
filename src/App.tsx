@@ -1,16 +1,10 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export default function App() {
   return (
     <>
-      <div className="text-2xl">Tailwind</div>
+      <div className="text-2xl bg-primary">Tailwind</div>
+      <div className="text-2xl bg-disabled">Tailwind</div>
     </>
   );
 }
-
-export default App;

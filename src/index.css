@@ -3,4 +3,9 @@
 @theme {
   --color-primary: #3b82f6;
   --color-disabled: #9ca3af;
+
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.25rem; /* 20px */
 }
