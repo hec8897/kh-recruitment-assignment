@@ -29,6 +29,7 @@ npm run preview  # Preview production build
 ## Architecture
 
 ### Folder Structure
+
 ```
 src/
 ├── api/           # axios client + TanStack Query hooks
@@ -43,12 +44,14 @@ src/
 ```
 
 ### Authentication Flow
+
 - JWT tokens stored in localStorage (accessToken, refreshToken)
 - Axios interceptor auto-attaches token to requests
 - 401 responses trigger token refresh or redirect to `/sign-in`
 - ProtectedRoute wrapper for auth-required pages
 
 ### Key Features
+
 - **Task List**: Virtual scrolling + infinite scroll pagination
 - **Login**: Form validation (email format, password 8-24 chars with Korean/English/numbers)
 - **Delete Modal**: Requires typing task ID to confirm deletion
@@ -60,6 +63,7 @@ Pretendard font is loaded via CDN in `index.html`.
 ## Git Flow
 
 Branch strategy:
+
 - `main` - Production-ready code
 - `develop` - Integration branch for features
 - `feature/*` - New features (branch from `develop`)
@@ -67,6 +71,7 @@ Branch strategy:
 - `hotfix/*` - Production bug fixes (branch from `main`)
 
 Workflow:
+
 ```bash
 # Start new feature
 git checkout develop
@@ -91,13 +96,16 @@ git merge release/v1.0.0
 
 ```markdown
 ## 제목
+
 feat/fix/chore: 간단한 설명
 
 ## 적용사항
+
 - 변경/추가된 내용 목록
 - 주요 구현 사항
 
 ## 다음 계획
+
 - [ ] 다음에 진행할 작업 1
 - [ ] 다음에 진행할 작업 2
 ```
