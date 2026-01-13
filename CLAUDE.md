@@ -92,6 +92,10 @@ git checkout develop
 git merge release/v1.0.0
 ```
 
+## Claude 작업 규칙
+
+- Push 후에는 항상 PR 메시지를 추천해준다
+
 ## PR Template
 
 ```markdown
@@ -109,3 +113,75 @@ feat/fix/chore: 간단한 설명
 - [ ] 다음에 진행할 작업 1
 - [ ] 다음에 진행할 작업 2
 ```
+
+---
+
+## Implementation Plan (구현 계획)
+
+### 진행 상황
+
+- [x] Phase 0: 프로젝트 초기 설정
+- [ ] Phase 1: 기반 인프라 구축
+- [ ] Phase 2: 인증 시스템
+- [ ] Phase 3: 레이아웃 및 공통 컴포넌트
+- [ ] Phase 4: 페이지 구현
+- [ ] Phase 5: 테스트 및 최적화
+
+### Phase 0: 프로젝트 초기 설정 ✅ 완료
+
+- [x] Vite + React 19 + TypeScript 세팅
+- [x] Tailwind CSS 디자인 시스템 설정
+- [x] 타입 정의 (`src/types/index.ts`)
+- [x] Path alias 설정 (`@/`)
+- [x] 의존성 설치 (TanStack Query, Axios, MSW, React Router 등)
+
+### Phase 1: 기반 인프라 구축 🔄 진행 예정
+
+- [ ] MSW 핸들러 구현
+  - [ ] `src/mocks/handlers/auth.ts` - 로그인, 토큰 갱신
+  - [ ] `src/mocks/handlers/user.ts` - 사용자 정보
+  - [ ] `src/mocks/handlers/dashboard.ts` - 대시보드 데이터
+  - [ ] `src/mocks/handlers/task.ts` - 작업 CRUD, 목록 (페이지네이션)
+  - [ ] `src/mocks/browser.ts` - MSW 브라우저 설정
+- [ ] Axios 클라이언트 설정
+  - [ ] `src/api/client.ts` - 인스턴스 생성, 인터셉터 (토큰 자동 첨부, 401 처리)
+- [ ] TanStack Query 설정
+  - [ ] `src/lib/queryClient.ts` - QueryClient 설정
+- [ ] API 쿼리 훅
+  - [ ] `src/api/queries/auth.ts` - useSignIn, useRefreshToken
+  - [ ] `src/api/queries/user.ts` - useUser
+  - [ ] `src/api/queries/dashboard.ts` - useDashboard
+  - [ ] `src/api/queries/task.ts` - useTasks (무한스크롤), useTask, useCreateTask, useUpdateTask, useDeleteTask
+
+### Phase 2: 인증 시스템
+
+- [ ] `src/hooks/useAuth.ts` - localStorage 토큰 관리, 로그인/로그아웃
+- [ ] `src/components/ProtectedRoute.tsx` - 인증 필요 페이지 래퍼
+- [ ] React Router 설정 (`src/App.tsx`)
+
+### Phase 3: 레이아웃 및 공통 컴포넌트
+
+- [ ] `src/components/common/Button.tsx`
+- [ ] `src/components/common/Modal.tsx`
+- [ ] `src/components/layout/GNB.tsx` - 상단 네비게이션
+- [ ] `src/components/layout/LNB.tsx` - 좌측 네비게이션
+- [ ] `src/components/layout/Layout.tsx` - 페이지 레이아웃 래퍼
+
+### Phase 4: 페이지 구현
+
+- [ ] `src/pages/SignIn.tsx` - 로그인 (폼 검증: 이메일 형식, 비밀번호 8-24자)
+- [ ] `src/pages/Dashboard.tsx` - 대시보드 (작업 통계)
+- [ ] `src/pages/TaskList.tsx` - 작업 목록 (가상 스크롤 + 무한 스크롤)
+- [ ] `src/pages/TaskDetail.tsx` - 작업 상세/수정
+- [ ] `src/pages/User.tsx` - 사용자 정보
+- [ ] `src/pages/NotFound.tsx` - 404 페이지
+
+### Phase 5: 테스트 및 최적화
+
+- [ ] 전체 기능 테스트
+- [ ] 빌드 검증 (`npm run build`)
+- [ ] 린트 검사 (`npm run lint`)
+
+### 현재 작업 브랜치
+
+- `feature/type-definitions` - Phase 0 완료, Phase 1 시작 예정
