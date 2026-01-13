@@ -95,6 +95,7 @@ git merge release/v1.0.0
 ## Claude 작업 규칙
 
 - Push 후에는 항상 PR 메시지를 추천해준다
+- 코드 구현은 사용자가 직접 작업하므로, 코드 추천/가이드만 제공한다
 
 ## PR Template
 
