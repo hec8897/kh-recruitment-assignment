@@ -11,9 +11,17 @@
 
   --font-family-sans: "Pretendard", sans-serif;
   --breakpoint-mobile: 640px;
+
+  --font-weight-bold: 700;
+  --font-weight-medium: 500;
+  --font-weight-regular: 400;
 }
 
 :root {
   font-family: var(--font-family-sans);
   font-size: var(--font-size-base);
+}
+
+span {
+  font-weight: var(--font-weight-regular);
 }

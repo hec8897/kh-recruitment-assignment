@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { PATHS } from "./paths";
 import { Layout } from "@/shared";
-import { SignInPage } from "@/domains";
+import { SignInPage, DashBoardPage } from "@/domains";
 
 export const router = createBrowserRouter([
   {
@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: PATHS.HOME,
-        element: <div>대시보드</div>,
+        element: <DashBoardPage />,
       },
       {
         path: PATHS.TASK,
