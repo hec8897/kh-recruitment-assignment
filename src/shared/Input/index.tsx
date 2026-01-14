@@ -32,6 +32,7 @@ export function Input({ label, register, error, ...props }: InputProps) {
           error ? inputStyles.error : inputStyles.enabled
         )}
       />
+      {error && <p className="text-sm text-red-500">{error}</p>}
     </div>
   );
 }
