@@ -1,13 +1,21 @@
-import { createBrowserRouter, Outlet } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import { PATHS } from "./paths";
+import { Layout } from "@/shared";
+import { SignInPage } from "@/domains";
 
 export const router = createBrowserRouter([
   {
     path: PATHS.SIGN_IN,
-    element: <div>로그인</div>,
+    element: <Layout />,
+    children: [
+      {
+        path: PATHS.SIGN_IN,
+        element: <SignInPage />,
+      },
+    ],
   },
   {
-    element: <Outlet />,
+    element: <Layout />,
     children: [
       {
         path: PATHS.HOME,
