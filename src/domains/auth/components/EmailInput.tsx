@@ -1,6 +1,7 @@
 import { Input } from "@/shared";
-import type { SignInRequest } from "@/types";
 import { useFormContext } from "react-hook-form";
+
+import type { SignInRequest } from "@/types";
 
 export function EmailInput() {
   const {

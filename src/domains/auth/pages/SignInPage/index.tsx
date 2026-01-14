@@ -1,14 +1,12 @@
-import { Button } from "@/shared";
+import { useState } from "react";
 
+import { Button } from "@/shared";
+import { EmailInput, PassWordInput, ErrorModal } from "../../components";
+
+import { useSignIn } from "../../hooks/useSignIn";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { EmailInput } from "../../components/EmailInput";
-import { PassWordInput } from "../../components/PassWordInput";
-import { ErrorModal } from "../../components/ErrorModal";
-import { useSignIn } from "../../hooks/useSignIn";
-
 import type { SignInRequest } from "@/types";
-import { useState } from "react";
 
 export function SignInPage() {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -25,7 +23,10 @@ export function SignInPage() {
     },
   });
 
-  const { handleSubmit } = form;
+  const {
+    handleSubmit,
+    formState: { isValid },
+  } = form;
 
   const onSubmit = handleSubmit((data: SignInRequest) => {
     signIn(data);
@@ -34,7 +35,6 @@ export function SignInPage() {
   return (
     <>
       <ErrorModal
-        isOpen={!!errorMessage}
         onClose={() => setErrorMessage("")}
         errorMessage={errorMessage}
       />
@@ -46,7 +46,9 @@ export function SignInPage() {
               <EmailInput />
               <PassWordInput />
             </div>
-            <Button onClick={onSubmit}>로그인</Button>
+            <Button disabled={!isValid} onClick={onSubmit}>
+              로그인
+            </Button>
           </div>
         </FormProvider>
       </div>
