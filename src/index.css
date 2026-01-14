@@ -8,4 +8,11 @@
   --font-size-sm: 0.875rem; /* 14px */
   --font-size-base: 1rem; /* 16px */
   --font-size-lg: 1.25rem; /* 20px */
+
+  --font-family-sans: "Pretendard", sans-serif;
+  --breakpoint-mobile: 640px;
+}
+
+:root {
+  font-family: var(--font-family-sans);
 }
