@@ -2,11 +2,11 @@ import { http, HttpResponse } from "msw";
 import { validateToken } from "./auth";
 import type { Task, TaskDetail } from "@/types";
 
-const tasks: Task[] = Array.from({ length: 50 }, (_, index) => ({
+export const tasks: Task[] = Array.from({ length: 50 }, (_, index) => ({
   id: index + 1,
   title: `Task ${index + 1}`,
-  memo: `Memo ${index + 1}`,
-  status: "TODO",
+  memo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+  status: index % 2 === 0 ? "TODO" : "DONE",
 }));
 
 const getTaskDetail = (id: number): TaskDetail | null => {
