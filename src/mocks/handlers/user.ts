@@ -2,7 +2,7 @@ import { http, HttpResponse } from "msw";
 import { validateToken } from "./auth";
 import type { User } from "@/types";
 
-const mockUser: User = {
+export const mockUser: User = {
   name: "John Doe",
   memo: "This is a memo",
 };

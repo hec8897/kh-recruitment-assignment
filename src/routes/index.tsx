@@ -1,7 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import { PATHS } from "./paths";
 import { Layout } from "@/shared";
-import { SignInPage, DashBoardPage, TaskList, TaskDetailPage } from "@/domains";
+import {
+  SignInPage,
+  DashBoardPage,
+  TaskList,
+  TaskDetailPage,
+  UserPage,
+} from "@/domains";
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +31,7 @@ export const router = createBrowserRouter([
       },
       {
         path: PATHS.USER,
-        element: <div>회원정보</div>,
+        element: <UserPage />,
       },
     ],
   },
