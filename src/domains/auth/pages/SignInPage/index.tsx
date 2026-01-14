@@ -1,43 +1,41 @@
-import { Button, Input } from "@/shared";
-import { useNavigate } from "react-router-dom";
-import { PATHS } from "@/routes/paths";
-import { useForm } from "react-hook-form";
+import { Button } from "@/shared";
+
+import { FormProvider, useForm } from "react-hook-form";
+
+import { EmailInput } from "../../components/EmailInput";
+import { PassWordInput } from "../../components/PassWordInput";
+import { useSignIn } from "../../hooks/useSignIn";
+
 import type { SignInRequest } from "@/types";
 
 export function SignInPage() {
-  const navigate = useNavigate();
+  const { mutate: signIn } = useSignIn();
 
-  const { register, handleSubmit } = useForm<SignInRequest>({
+  const form = useForm<SignInRequest>({
     values: {
-      email: "",
-      password: "",
+      email: "test@example.com",
+      password: "password123",
     },
   });
 
-  const onSubmit = async (data: SignInRequest) => {
-    console.log(data);
-    navigate(PATHS.HOME);
-  };
+  const { handleSubmit } = form;
+
+  const onSubmit = handleSubmit((data: SignInRequest) => {
+    signIn(data);
+  });
 
   return (
     <div className="max-w-[430px] m-auto min-h-screen bg-white flex flex-col items-center justify-center px-4 gap-8">
       <h1 className="text-2xl font-bold">로그인</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-4">
-        <div className="flex flex-col gap-4 w-full">
-          <Input
-            label="이메일"
-            placeholder="email@example.com"
-            {...register("email")}
-          />
-          <Input
-            label="비밀번호"
-            placeholder="비밀번호"
-            type="password"
-            {...register("password")}
-          />
+      <FormProvider {...form}>
+        <div className="w-full space-y-4">
+          <div className="flex flex-col gap-4 w-full">
+            <EmailInput />
+            <PassWordInput />
+          </div>
+          <Button onClick={onSubmit}>로그인</Button>
         </div>
-        <Button type="submit">로그인</Button>
-      </form>
+      </FormProvider>
     </div>
   );
 }
