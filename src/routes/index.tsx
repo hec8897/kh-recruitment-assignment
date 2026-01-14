@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { PATHS } from "./paths";
 import { Layout } from "@/shared";
-import { SignInPage, DashBoardPage, TaskList } from "@/domains";
+import { SignInPage, DashBoardPage, TaskList, TaskDetailPage } from "@/domains";
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
       },
       {
         path: PATHS.TASK_DETAIL,
-        element: <div>할 일 상세</div>,
+        element: <TaskDetailPage />,
       },
       {
         path: PATHS.USER,
