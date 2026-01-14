@@ -1,8 +1,9 @@
+import { useState } from "react";
+
 import { useParams } from "react-router-dom";
 import { getTaskDetail } from "@/mocks/handlers/task";
+import { DetailDeleteModal } from "./DetailDeleteModal";
 import { Trash2 } from "lucide-react";
-import { Modal } from "@/shared";
-import { useState } from "react";
 
 export function TaskDetailPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,12 +17,7 @@ export function TaskDetailPage() {
 
   return (
     <div>
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <div>
-          <h2>삭제</h2>
-          <p>정말 삭제하시겠습니까?</p>
-        </div>
-      </Modal>
+      <DetailDeleteModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
       <div className="mb-8">
         <div className="flex justify-between items-center gap-2">
           <h1 className="text-2xl font-bold">{task?.title}</h1>
