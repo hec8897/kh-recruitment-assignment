@@ -1,3 +1,4 @@
 export * from "./SignInPage";
 export * from "./DashBoardPage";
-export * from "./TaskList";
+export * from "./task/pages/TaskListPage";
+export * from "./task/pages/TaskDetailPage";
