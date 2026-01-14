@@ -3,6 +3,7 @@
 @theme {
   --color-primary: #3b82f6;
   --color-disabled: #9ca3af;
+  --color-dim: rgba(0, 0, 0, 0.5);
 
   --font-size-xs: 0.75rem; /* 12px */
   --font-size-sm: 0.875rem; /* 14px */
