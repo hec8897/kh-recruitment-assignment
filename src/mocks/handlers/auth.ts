@@ -26,7 +26,7 @@ function createMockJwt(expiresSeconds: number) {
 }
 
 //* 토큰 유효성 검사 함수
-function isTokenValid(token: string): boolean {
+export function isTokenValid(token: string): boolean {
   try {
     const payload = JSON.parse(atob(token.split(".")[1]));
     return payload.exp > Math.floor(Date.now() / 1000);
