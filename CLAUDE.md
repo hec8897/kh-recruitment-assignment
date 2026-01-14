@@ -28,19 +28,42 @@ npm run preview  # Preview production build
 
 ## Architecture
 
-### Folder Structure
+### Folder Structure (Domain-Driven)
 
 ```
 src/
-├── api/           # axios client + TanStack Query hooks
-├── mocks/         # MSW handlers (auth, user, dashboard, task)
-├── components/
-│   ├── layout/    # GNB, LNB, Layout
-│   └── common/    # Modal, Button
-├── pages/         # SignIn, Dashboard, TaskList, TaskDetail, User, NotFound
-├── hooks/         # useAuth (localStorage-based token management)
-├── types/         # TypeScript interfaces
-└── lib/           # QueryClient setup
+├── domains/              # 비즈니스 도메인별 그룹화
+│   ├── auth/             # 인증 도메인
+│   │   ├── components/   # SignInForm
+│   │   ├── pages/        # SignIn
+│   │   ├── hooks/        # useAuth
+│   │   └── api/          # auth API
+│   │
+│   ├── task/             # 할 일 도메인
+│   │   ├── components/   # TaskCard, TaskList
+│   │   ├── pages/        # TaskListPage, TaskDetailPage
+│   │   └── api/          # task API
+│   │
+│   ├── dashboard/        # 대시보드 도메인
+│   │   ├── components/   # StatCard
+│   │   ├── pages/        # Dashboard
+│   │   └── api/          # dashboard API
+│   │
+│   └── user/             # 사용자 도메인
+│       ├── pages/        # User
+│       └── api/          # user API
+│
+├── shared/               # 공용 (도메인 무관)
+│   ├── components/       # Layout, ProtectedRoute, Button, Modal
+│   └── hooks/            # useModal
+│
+├── routes/               # 라우터 설정
+│   ├── index.tsx
+│   └── paths.ts
+│
+├── types/                # TypeScript interfaces
+├── mocks/                # MSW handlers
+└── lib/                  # QueryClient setup
 ```
 
 ### Authentication Flow
