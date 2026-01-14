@@ -9,7 +9,7 @@ export function SignInPage() {
     navigate(PATHS.HOME);
   };
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 gap-8">
+    <div className="max-w-[430px] m-auto min-h-screen bg-white flex flex-col items-center justify-center px-4 gap-8">
       <h1 className="text-2xl font-bold">로그인</h1>
       <div className="flex flex-col gap-4 w-full">
         <Input label="이메일" placeholder="email@example.com" />
