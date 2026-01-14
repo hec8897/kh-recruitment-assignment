@@ -13,7 +13,9 @@ export function DetailDeleteModal({ isOpen, onClose }: DetailDeleteModalProps) {
       </div>
       <div className="flex justify-end gap-2">
         <Button>삭제</Button>
-        <Button variant="secondary">닫기</Button>
+        <Button variant="secondary" onClick={onClose}>
+          닫기
+        </Button>
       </div>
     </Modal>
   );
