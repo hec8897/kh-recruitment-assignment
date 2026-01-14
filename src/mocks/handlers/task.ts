@@ -2,14 +2,12 @@ import { http, HttpResponse } from "msw";
 import { validateToken } from "./auth";
 import type { Task, TaskDetail } from "@/types";
 
-const tasks: Task[] = [
-  {
-    id: 1,
-    title: "Task 1",
-    memo: "Memo 1",
-    status: "TODO",
-  },
-];
+const tasks: Task[] = Array.from({ length: 50 }, (_, index) => ({
+  id: index + 1,
+  title: `Task ${index + 1}`,
+  memo: `Memo ${index + 1}`,
+  status: "TODO",
+}));
 
 const getTaskDetail = (id: number): TaskDetail | null => {
   const task = tasks.find((t) => t.id === id);
@@ -23,7 +21,7 @@ const getTaskDetail = (id: number): TaskDetail | null => {
 
 export const taskHandlers = [
   // GET /api/tasks : 목록
-  http.get("/api/tasks", ({ request }) => {
+  http.get("/api/task", ({ request }) => {
     if (!validateToken(request)) {
       return HttpResponse.json(
         { errorMessage: "토큰이 만료되었습니다." },
@@ -47,7 +45,7 @@ export const taskHandlers = [
   }),
 
   // GET /api/tasks/:id : 상세
-  http.get("/api/tasks/:id", ({ request, params }) => {
+  http.get("/api/task/:id", ({ request, params }) => {
     if (!validateToken(request)) {
       return HttpResponse.json(
         { errorMessage: "토큰이 만료되었습니다." },

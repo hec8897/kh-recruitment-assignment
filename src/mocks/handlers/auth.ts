@@ -57,14 +57,15 @@ export const authHandlers = [
         errorMessage: "이메일 또는 비밀번호가 올바르지 않습니다.",
       },
       {
-        status: 401,
+        status: 400,
       }
     );
   }),
 
   // POST /api/refresh 토큰 갱신
   http.post("/api/refresh", async ({ request }) => {
-    const { refreshToken } = (await request.json()) as AuthTokens;
+    const authHeader = request.headers.get("Authorization");
+    const refreshToken = authHeader?.replace("Bearer ", "");
     if (!refreshToken) {
       return HttpResponse.json(
         {
