@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { RouterProvider } from "react-router-dom";
+import { router } from "@/routes";
 
 export default function App() {
   useEffect(() => {
@@ -17,8 +19,7 @@ export default function App() {
   }, []);
   return (
     <>
-      <div className="text-2xl bg-primary">Tailwind</div>
-      <div className="text-2xl bg-disabled">Tailwind</div>
+      <RouterProvider router={router} />
     </>
   );
 }
