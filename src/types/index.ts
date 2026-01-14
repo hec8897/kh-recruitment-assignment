@@ -19,17 +19,16 @@ export interface DashboardData {
   numOfDoneTask: number;
 }
 
-export interface Task {
-  id: string;
+export interface BaseTask {
+  id: number;
   title: string;
   memo: string;
+}
+export interface Task extends BaseTask {
   status: "TODO" | "DONE";
 }
 
-export interface TaskDetail {
-  id: string;
-  title: string;
-  memo: string;
+export interface TaskDetail extends BaseTask {
   registerDatetime: string;
 }
 
