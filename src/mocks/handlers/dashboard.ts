@@ -3,7 +3,7 @@ import { validateToken } from "./auth";
 
 import type { DashboardData } from "@/types";
 
-const mockDashboard: DashboardData = {
+export const mockDashboard: DashboardData = {
   numOfTask: 10,
   numOfRestTask: 5,
   numOfDoneTask: 5,
