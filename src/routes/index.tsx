@@ -6,13 +6,7 @@ import { SignInPage } from "@/domains";
 export const router = createBrowserRouter([
   {
     path: PATHS.SIGN_IN,
-    element: <Layout />,
-    children: [
-      {
-        path: PATHS.SIGN_IN,
-        element: <SignInPage />,
-      },
-    ],
+    element: <SignInPage />,
   },
   {
     element: <Layout />,
