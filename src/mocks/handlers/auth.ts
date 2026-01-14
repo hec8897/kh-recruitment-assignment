@@ -1,14 +1,48 @@
 import { http, HttpResponse } from "msw";
 import type { SignInRequest, AuthTokens } from "@/types";
 
+const TOKEN_EXPIRY = {
+  ACCESS_TOKEN: 60 * 30, // 30분
+  REFRESH_TOKEN: 60 * 60 * 24, // 24시간
+};
+
+const TEST_USER = {
+  email: "test@example.com",
+  password: "password123",
+  id: "mock-user-id",
+} as const;
+
+//* 토큰 생성함수
+function createMockJwt(expiresSeconds: number) {
+  const header = btoa(JSON.stringify({ alg: "HS256", typ: "JWT" }));
+  const payload = btoa(
+    JSON.stringify({
+      id: TEST_USER.id,
+      exp: Math.floor(Date.now() / 1000) + expiresSeconds,
+    })
+  );
+
+  return `${header}.${payload}.mock-signature`;
+}
+
+//* 토큰 유효성 검사 함수
+function isTokenValid(token: string): boolean {
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.exp > Math.floor(Date.now() / 1000);
+  } catch {
+    return false;
+  }
+}
+
 export const authHandlers = [
   // POST /api/sign-in : 로그인 요청 처리
   http.post("/api/sign-in", async ({ request }) => {
     const { email, password } = (await request.json()) as SignInRequest;
-    if (email === "test@example.com" && password === "password123") {
+    if (email === TEST_USER.email && password === TEST_USER.password) {
       return HttpResponse.json({
-        accessToken: "mock-access-token",
-        refreshToken: "mock-refresh-token",
+        accessToken: createMockJwt(TOKEN_EXPIRY.ACCESS_TOKEN), // 30분 후 만료
+        refreshToken: createMockJwt(TOKEN_EXPIRY.REFRESH_TOKEN), // 24시간
       });
     }
 
@@ -36,13 +70,10 @@ export const authHandlers = [
       );
     }
 
-    if (
-      refreshToken === "mock-refresh-token" ||
-      refreshToken === "new-mock-refresh-token" // 갱신된 새로운 토큰
-    ) {
+    if (isTokenValid(refreshToken)) {
       return HttpResponse.json({
-        accessToken: "new-mock-access-token",
-        refreshToken: "new-mock-refresh-token",
+        accessToken: createMockJwt(TOKEN_EXPIRY.ACCESS_TOKEN), // 30분 후 만료
+        refreshToken: createMockJwt(TOKEN_EXPIRY.REFRESH_TOKEN), // 24시간
       });
     }
 
