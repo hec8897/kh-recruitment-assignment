@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { PATHS } from "./paths";
 import { Layout } from "@/shared";
+import { SignInPage } from "@/domains";
 
 export const router = createBrowserRouter([
   {
@@ -9,7 +10,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: PATHS.SIGN_IN,
-        element: <div>로그인</div>,
+        element: <SignInPage />,
       },
     ],
   },
