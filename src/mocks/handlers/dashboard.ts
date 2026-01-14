@@ -1,5 +1,5 @@
 import { http, HttpResponse } from "msw";
-import { isTokenValid } from "./auth";
+import { validateToken } from "./auth";
 
 import type { DashboardData } from "@/types";
 
@@ -11,10 +11,7 @@ const mockDashboard: DashboardData = {
 
 export const dashboardHandlers = [
   http.get("/api/dashboard", async ({ request }) => {
-    const authHeader = request.headers.get("Authorization");
-    const token = authHeader?.replace("Bearer ", "");
-
-    if (!token || !isTokenValid(token)) {
+    if (!validateToken(request)) {
       return HttpResponse.json(
         { errorMessage: "토큰이 만료되었습니다." },
         { status: 401 }

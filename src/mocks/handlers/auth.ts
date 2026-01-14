@@ -26,13 +26,19 @@ function createMockJwt(expiresSeconds: number) {
 }
 
 //* 토큰 유효성 검사 함수
-export function isTokenValid(token: string): boolean {
+function isTokenValid(token: string): boolean {
   try {
     const payload = JSON.parse(atob(token.split(".")[1]));
     return payload.exp > Math.floor(Date.now() / 1000);
   } catch {
     return false;
   }
+}
+
+export function validateToken(request: Request) {
+  const authHeader = request.headers.get("Authorization");
+  const token = authHeader?.replace("Bearer ", "");
+  return token && isTokenValid(token);
 }
 
 export const authHandlers = [
