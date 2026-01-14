@@ -9,7 +9,7 @@ export const tasks: Task[] = Array.from({ length: 50 }, (_, index) => ({
   status: index % 2 === 0 ? "TODO" : "DONE",
 }));
 
-const getTaskDetail = (id: number): TaskDetail | null => {
+export const getTaskDetail = (id: number): TaskDetail | null => {
   const task = tasks.find((t) => t.id === id);
   if (!task) return null;
 
