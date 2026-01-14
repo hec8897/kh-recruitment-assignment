@@ -6,7 +6,7 @@ const isLoggedIn = true; // 임시
 
 export function GNB() {
   return (
-    <header className="sticky top-0 z-10 flex justify-between items-center px-2 h-14 bg-white border-b">
+    <header className="sticky top-0 z-10 flex justify-between items-center px-2 h-14 bg-white border-b border-gray-200">
       <NavLink to={PATHS.HOME} className="text-xl font-bold">
         <h1>TODO LIST</h1>
       </NavLink>
