@@ -1,23 +1,16 @@
 import { http, HttpResponse } from "msw";
-import { validateToken } from "./auth";
+import { tasks } from "./data/mock";
 
 import type { DashboardData } from "@/types";
 
-export const mockDashboard: DashboardData = {
-  numOfTask: 10,
-  numOfRestTask: 5,
-  numOfDoneTask: 5,
-};
+const getDashboardData = (): DashboardData => ({
+  numOfTask: tasks.length,
+  numOfRestTask: tasks.filter((t) => t.status === "TODO").length,
+  numOfDoneTask: tasks.filter((t) => t.status === "DONE").length,
+});
 
 export const dashboardHandlers = [
-  http.get("/api/dashboard", async ({ request }) => {
-    if (!validateToken(request)) {
-      return HttpResponse.json(
-        { errorMessage: "토큰이 만료되었습니다." },
-        { status: 401 }
-      );
-    }
-
-    return HttpResponse.json(mockDashboard);
+  http.get("/api/dashboard", async () => {
+    return HttpResponse.json(getDashboardData());
   }),
 ];
