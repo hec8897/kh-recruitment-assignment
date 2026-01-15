@@ -10,11 +10,23 @@ export function TaskDetailPage() {
   const [isOpen, setIsOpen] = useState(false);
   const { id } = useParams();
 
-  const { data: task } = useTaskDetail(Number(id));
+  const { data: task, isLoading, error } = useTaskDetail(Number(id));
 
   const handleDelete = () => {
     setIsOpen(true);
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return (
+      <div>
+        <h2>not-found</h2>
+      </div>
+    );
+  }
 
   return (
     <div>
