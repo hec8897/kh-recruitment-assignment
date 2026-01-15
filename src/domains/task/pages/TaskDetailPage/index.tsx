@@ -1,15 +1,16 @@
 import { useState } from "react";
 
 import { useParams } from "react-router-dom";
-import { getTaskDetail } from "@/mocks/handlers/task";
+
 import { DetailDeleteModal } from "./DetailDeleteModal";
 import { Trash2 } from "lucide-react";
+import { useTaskDetail } from "../../hook";
 
 export function TaskDetailPage() {
   const [isOpen, setIsOpen] = useState(false);
   const { id } = useParams();
 
-  const task = getTaskDetail(Number(id));
+  const { data: task } = useTaskDetail(Number(id));
 
   const handleDelete = () => {
     setIsOpen(true);
