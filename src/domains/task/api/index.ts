@@ -10,3 +10,5 @@ export const getTasks = ({ page = 1, limit = 20 }: GetTasksParams = {}) =>
   api.get<TaskListResponse>("/task", { params: { page, limit } });
 
 export const getTaskDetail = (id: number) => api.get<TaskDetail>(`/task/${id}`);
+
+export const deleteTask = (id: number) => api.delete(`/task/${id}`);
