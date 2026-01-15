@@ -1,10 +1,13 @@
 import { LogIn, User } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { PATHS } from "@/routes/paths";
-
-const isLoggedIn = true; // 임시
+import { useUser } from "@/domains/user/hooks/useUser";
 
 export function GNB() {
+  const { data: user } = useUser();
+
+  const isLoggedIn = !!user;
+
   return (
     <header className="sticky top-0 z-10 flex justify-between items-center px-2 h-14 bg-white border-b border-gray-200">
       <NavLink to={PATHS.HOME} className="text-xl font-bold">
