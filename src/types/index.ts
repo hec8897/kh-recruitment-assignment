@@ -32,6 +32,12 @@ export interface TaskDetail extends BaseTask {
   registerDatetime: string;
 }
 
+export interface TaskListResponse {
+  tasks: Task[];
+  totalCount: number;
+  hasNext: boolean;
+}
+
 export interface ApiError {
   errorMessage: string;
 }
