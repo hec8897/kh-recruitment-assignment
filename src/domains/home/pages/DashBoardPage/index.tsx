@@ -9,8 +9,8 @@ export function DashBoardPage() {
     <div>
       <div className="border border-gray-200 rounded-xl flex px-2 py-4">
         <DashBoardCard
-          title="전체"
-          count={dashboard?.numOfDoneTask || 0}
+          title="일"
+          count={dashboard?.numOfTask || 0}
           isBorderRight
         />
         <DashBoardCard
@@ -18,7 +18,7 @@ export function DashBoardPage() {
           count={dashboard?.numOfRestTask || 0}
           isBorderRight
         />
-        <DashBoardCard title="완료한 일" count={dashboard?.numOfTask || 0} />
+        <DashBoardCard title="한 일" count={dashboard?.numOfDoneTask || 0} />
       </div>
     </div>
   );
