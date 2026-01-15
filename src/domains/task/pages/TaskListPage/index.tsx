@@ -1,8 +1,13 @@
 import { TaskCard } from "./TaskCard";
-import { useTasks } from "../../hook/useTasks";
+import { useTasks, useIntersectionObserver } from "../../hook";
 
 export function TaskList() {
-  const { data: tasks, isLoading } = useTasks();
+  const { data: tasks, isLoading, fetchNextPage, hasNextPage } = useTasks();
+
+  const ref = useIntersectionObserver({
+    onCallback: fetchNextPage,
+    enabled: hasNextPage,
+  });
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -11,6 +16,7 @@ export function TaskList() {
       {tasks?.map((task) => (
         <TaskCard key={task.id} task={task} />
       ))}
+      <div ref={ref} />
     </div>
   );
 }
