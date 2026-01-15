@@ -9,6 +9,7 @@ import { PATHS } from "@/routes/paths";
 
 export function useTasks() {
   const navigate = useNavigate();
+  const currentPath = window.location.pathname;
 
   const query = useInfiniteQuery({
     queryKey: ["tasks"],
@@ -23,12 +24,12 @@ export function useTasks() {
   const { error } = query;
 
   useEffect(() => {
-    if (error) {
-      if (isAxiosError(error)) {
-        navigate(PATHS.SIGN_IN);
+    if (error && isAxiosError(error)) {
+      if (error.response?.status === 401) {
+        navigate(`${PATHS.SIGN_IN}?redirect=${currentPath}`);
       }
     }
-  }, [error, navigate]);
+  }, [error, navigate, currentPath]);
 
   return query;
 }

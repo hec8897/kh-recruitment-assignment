@@ -13,12 +13,15 @@ interface UseSignInProps {
 
 export function useSignIn({ onError }: UseSignInProps) {
   const navigate = useNavigate();
+  const searchParams = new URLSearchParams(window.location.search);
+  const redirect = searchParams.get("redirect") || PATHS.HOME;
+
   return useMutation({
     mutationFn: signIn,
     onSuccess: ({ data: { accessToken, refreshToken } }) => {
       localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
       localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
-      navigate(PATHS.HOME);
+      navigate(redirect);
     },
     onError: (error: AxiosError) => {
       onError((error.response?.data as ApiError)?.errorMessage ?? "");
