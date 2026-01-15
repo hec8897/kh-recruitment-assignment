@@ -10,7 +10,7 @@ export function TaskDetailPage() {
   const [isOpen, setIsOpen] = useState(false);
   const { id } = useParams();
 
-  const { data: task, isLoading, error } = useTaskDetail(Number(id));
+  const { data: task, isLoading, error } = useTaskDetail(id ?? "");
 
   const handleDelete = () => {
     setIsOpen(true);
@@ -30,7 +30,11 @@ export function TaskDetailPage() {
 
   return (
     <div>
-      <DetailDeleteModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <DetailDeleteModal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        id={id ?? ""}
+      />
       <div className="mb-8">
         <div className="flex justify-between items-center gap-2">
           <h1 className="text-2xl font-bold">{task?.title}</h1>
