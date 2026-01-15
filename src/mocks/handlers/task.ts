@@ -1,7 +1,7 @@
 import { http, HttpResponse } from "msw";
 import { validateToken } from "./auth";
 
-import { tasks } from "./data/mock";
+import { deleteTask, tasks } from "./data/mock";
 import type { TaskDetail } from "@/types";
 
 const getTaskDetail = (id: number): TaskDetail | null => {
@@ -59,5 +59,15 @@ export const taskHandlers = [
     }
 
     return HttpResponse.json(getTaskDetail(Number(id)));
+  }),
+
+  // DELETE /api/task/:id : 삭제
+  http.delete("/api/task/:id", ({ params }) => {
+    const id = Number(params.id);
+    deleteTask(id);
+    return HttpResponse.json(
+      { message: "작업이 삭제되었습니다." },
+      { status: 204 }
+    );
   }),
 ];
