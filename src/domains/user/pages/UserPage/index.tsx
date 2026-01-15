@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Button } from "@/shared";
 
 import { useNavigate } from "react-router-dom";
@@ -7,7 +8,7 @@ import { PATHS } from "@/routes/paths";
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "@/lib/constants";
 
 export function UserPage() {
-  const { data: user, isLoading } = useUser();
+  const { data: user, isLoading, error } = useUser();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -15,6 +16,12 @@ export function UserPage() {
     localStorage.removeItem(REFRESH_TOKEN_KEY);
     navigate(PATHS.SIGN_IN);
   };
+
+  useEffect(() => {
+    if (error) {
+      navigate(PATHS.SIGN_IN);
+    }
+  }, [error, navigate]);
 
   if (isLoading) return <div>Loading...</div>;
   return (
