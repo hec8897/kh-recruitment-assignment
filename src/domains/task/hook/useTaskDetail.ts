@@ -13,7 +13,7 @@ export function useTaskDetail(id: number) {
     queryKey: ["task", id],
     queryFn: () => getTaskDetail(id),
     select: (response) => response.data,
-    enabled: !!id,
+    enabled: id !== undefined && !isNaN(id),
   });
 
   const { error } = query;
