@@ -1,4 +1,4 @@
-import { DashBoardCard } from "./DashBoardCard";
+import { DashBoardCard } from "../../components/DashBoardCard";
 // 임시
 import { mockDashboard } from "@/mocks/handlers/dashboard";
 
