@@ -1,4 +1,4 @@
-import { tasks } from "@/mocks/handlers/task";
+import { tasks } from "@/mocks/handlers/data/mock";
 import { TaskCard } from "./TaskCard";
 
 export function TaskList() {

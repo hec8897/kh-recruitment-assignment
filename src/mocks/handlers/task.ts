@@ -1,13 +1,8 @@
 import { http, HttpResponse } from "msw";
 import { validateToken } from "./auth";
-import type { Task, TaskDetail } from "@/types";
 
-export const tasks: Task[] = Array.from({ length: 50 }, (_, index) => ({
-  id: index + 1,
-  title: `Task ${index + 1}`,
-  memo: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
-  status: index % 2 === 0 ? "TODO" : "DONE",
-}));
+import { tasks } from "./data/mock";
+import type { TaskDetail } from "@/types";
 
 export const getTaskDetail = (id: number): TaskDetail | null => {
   const task = tasks.find((t) => t.id === id);
