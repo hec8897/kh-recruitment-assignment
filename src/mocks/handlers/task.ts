@@ -4,7 +4,7 @@ import { validateToken } from "./auth";
 import { tasks } from "./data/mock";
 import type { TaskDetail } from "@/types";
 
-export const getTaskDetail = (id: number): TaskDetail | null => {
+const getTaskDetail = (id: number): TaskDetail | null => {
   const task = tasks.find((t) => t.id === id);
   if (!task) return null;
 
