@@ -6,13 +6,14 @@ import { getTasks } from "../api";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { PATHS } from "@/routes/paths";
+import { QUERY_KEYS } from "@/lib/queryKeys";
 
 export function useTasks() {
   const navigate = useNavigate();
   const currentPath = window.location.pathname;
 
   const query = useInfiniteQuery({
-    queryKey: ["tasks"],
+    queryKey: QUERY_KEYS.tasks,
     queryFn: ({ pageParam = 1 }) => getTasks({ page: pageParam }),
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.data.hasNext ? allPages.length + 1 : undefined;
