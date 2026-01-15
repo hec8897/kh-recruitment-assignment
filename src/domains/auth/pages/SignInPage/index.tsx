@@ -8,9 +8,16 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import type { SignInRequest } from "@/types";
 
+const defaultValues = import.meta.env.DEV
+  ? {
+      email: import.meta.env.VITE_DEV_EMAIL,
+      password: import.meta.env.VITE_DEV_PASSWORD,
+    }
+  : { email: "", password: "" };
+
 export function SignInPage() {
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const { mutate: signIn } = useSignIn({
+  const { mutate: signIn, isPending } = useSignIn({
     onError: (errorMessage) => {
       setErrorMessage(errorMessage ?? "");
     },
@@ -18,8 +25,7 @@ export function SignInPage() {
 
   const form = useForm<SignInRequest>({
     values: {
-      email: "test@example.com",
-      password: "password123",
+      ...defaultValues,
     },
   });
 
@@ -35,21 +41,22 @@ export function SignInPage() {
   return (
     <>
       <ErrorModal
+        isOpen={!!errorMessage}
         onClose={() => setErrorMessage("")}
         errorMessage={errorMessage}
       />
       <div className="max-w-[430px] m-auto min-h-screen bg-white flex flex-col items-center justify-center px-4 gap-8">
         <h1 className="text-2xl font-bold">로그인</h1>
         <FormProvider {...form}>
-          <div className="w-full space-y-4">
-            <div className="flex flex-col gap-4 w-full">
+          <form onSubmit={onSubmit} className="w-full">
+            <div className="flex flex-col gap-4 w-full mb-8">
               <EmailInput />
               <PassWordInput />
             </div>
-            <Button disabled={!isValid} onClick={onSubmit}>
-              로그인
+            <Button disabled={!isValid || isPending} type="submit">
+              {isPending ? "로그인중..." : "로그인"}
             </Button>
-          </div>
+          </form>
         </FormProvider>
       </div>
     </>
