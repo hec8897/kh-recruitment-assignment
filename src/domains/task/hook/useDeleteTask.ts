@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteTask } from "../api";
+
 import { QUERY_KEYS } from "@/lib/queryKeys";
+
+import { deleteTask } from "../api";
 
 export function useDeleteTask({ onSuccess }: { onSuccess: () => void }) {
   const queryClient = useQueryClient();

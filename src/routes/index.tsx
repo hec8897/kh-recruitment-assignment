@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { PATHS } from "./paths";
-import { Layout } from "@/shared";
+
 import {
   SignInPage,
   DashBoardPage,
@@ -8,6 +7,9 @@ import {
   TaskDetailPage,
   UserPage,
 } from "@/domains";
+import { Layout } from "@/shared";
+
+import { PATHS } from "./paths";
 
 export const router = createBrowserRouter([
   {

@@ -1,8 +1,9 @@
-import { StatusTag } from "./StatusTag";
 import { Link } from "react-router-dom";
 
 import { PATHS } from "@/routes/paths";
 import type { Task } from "@/types";
+
+import { StatusTag } from "./StatusTag";
 
 interface TaskCardProps {
   task: Task;

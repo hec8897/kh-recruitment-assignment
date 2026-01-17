@@ -1,11 +1,13 @@
 import { useEffect } from "react";
-import { Button } from "@/shared";
 
 import { useNavigate } from "react-router-dom";
+
+import { tokenStorage } from "@/lib/storage";
+import { PATHS } from "@/routes/paths";
+import { Button } from "@/shared";
+
 import { useUser } from "../../hooks/useUser";
 
-import { PATHS } from "@/routes/paths";
-import { tokenStorage } from "@/lib/storage";
 
 export function UserPage() {
   const { data: user, isLoading, error } = useUser();

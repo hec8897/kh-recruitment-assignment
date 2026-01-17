@@ -1,7 +1,9 @@
 import type { InputHTMLAttributes } from "react";
-import type { UseFormRegisterReturn } from "react-hook-form";
 
 import clsx from "clsx";
+
+import type { UseFormRegisterReturn } from "react-hook-form";
+
 
 const inputStyles = {
   base: "w-full py-2 rounded-md text-base border px-4",

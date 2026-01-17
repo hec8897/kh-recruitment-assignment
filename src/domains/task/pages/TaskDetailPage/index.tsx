@@ -1,9 +1,9 @@
 import { useState } from "react";
 
+import { Trash2 } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 import { DetailDeleteModal } from "./DetailDeleteModal";
-import { Trash2 } from "lucide-react";
 import { useTaskDetail } from "../../hook";
 
 export function TaskDetailPage() {

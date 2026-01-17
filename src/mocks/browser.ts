@@ -1,4 +1,5 @@
 import { setupWorker } from "msw/browser";
+
 import {
   authHandlers,
   userHandlers,

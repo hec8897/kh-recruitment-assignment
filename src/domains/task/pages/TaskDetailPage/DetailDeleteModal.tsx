@@ -1,10 +1,11 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
+import { PATHS } from "@/routes/paths";
 import { Button, Input, Modal } from "@/shared";
 
 import { useDeleteTask } from "../../hook";
-import { useNavigate } from "react-router-dom";
-import { PATHS } from "@/routes/paths";
 
 interface DetailDeleteModalProps {
   isOpen: boolean;

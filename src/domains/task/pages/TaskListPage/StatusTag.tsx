@@ -1,4 +1,5 @@
 import clsx from "clsx";
+
 import type { Task } from "@/types";
 
 export function StatusTag({ status }: { status: Task["status"] }) {

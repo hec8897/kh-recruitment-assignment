@@ -1,7 +1,8 @@
 import { LogIn, User } from "lucide-react";
 import { NavLink } from "react-router-dom";
-import { PATHS } from "@/routes/paths";
+
 import { useUser } from "@/domains/user/hooks/useUser";
+import { PATHS } from "@/routes/paths";
 
 export function GNB() {
   const { data: user } = useUser();

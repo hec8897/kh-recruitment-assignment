@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { getUser } from "../api";
 import { QUERY_KEYS } from "@/lib/queryKeys";
+
+import { getUser } from "../api";
 
 export function useUser() {
   return useQuery({
