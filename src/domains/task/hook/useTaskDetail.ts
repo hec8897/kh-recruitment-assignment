@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { PATHS } from "@/routes/paths";
 import { QUERY_KEYS } from "@/lib/queryKeys";
 
-export function useTaskDetail(id: string) {
+export function useTaskDetail(id?: string) {
   const navigate = useNavigate();
   const location = useLocation();
 
