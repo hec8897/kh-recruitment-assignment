@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { signIn } from "../api";
 import { PATHS } from "@/routes/paths";
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "@/lib/constants";
+import { tokenStorage } from "@/lib/storage";
 
 import type { AxiosError } from "axios";
 import type { ApiError } from "@/types";
@@ -19,8 +19,7 @@ export function useSignIn({ onError }: UseSignInProps) {
   return useMutation({
     mutationFn: signIn,
     onSuccess: ({ data: { accessToken, refreshToken } }) => {
-      localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
-      localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+      tokenStorage.setTokens(accessToken, refreshToken);
       navigate(redirect);
     },
     onError: (error: AxiosError) => {

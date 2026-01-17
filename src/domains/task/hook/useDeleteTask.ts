@@ -8,7 +8,6 @@ export function useDeleteTask({ onSuccess }: { onSuccess: () => void }) {
   return useMutation({
     mutationFn: deleteTask,
     onSuccess: (_, context) => {
-      console.log(context);
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.tasks });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.dashboard });
 

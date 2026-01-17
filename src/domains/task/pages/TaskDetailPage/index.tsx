@@ -8,7 +8,7 @@ import { useTaskDetail } from "../../hook";
 
 export function TaskDetailPage() {
   const [isOpen, setIsOpen] = useState(false);
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
 
   const { data: task, isLoading, error } = useTaskDetail(id ?? "");
 

@@ -5,15 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
 
 import { PATHS } from "@/routes/paths";
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "@/lib/constants";
+import { tokenStorage } from "@/lib/storage";
 
 export function UserPage() {
   const { data: user, isLoading, error } = useUser();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem(ACCESS_TOKEN_KEY);
-    localStorage.removeItem(REFRESH_TOKEN_KEY);
+    tokenStorage.clearTokens();
     navigate(PATHS.SIGN_IN);
   };
 

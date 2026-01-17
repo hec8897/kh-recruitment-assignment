@@ -1,10 +1,5 @@
 import axios from "axios";
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "./constants";
-
-const removeToken = () => {
-  localStorage.removeItem(ACCESS_TOKEN_KEY);
-  localStorage.removeItem(REFRESH_TOKEN_KEY);
-};
+import { tokenStorage } from "./storage";
 
 const tokenHeader = (token: string) => {
   return `Bearer ${token}`;
@@ -18,7 +13,7 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem(ACCESS_TOKEN_KEY);
+  const token = tokenStorage.getAccessToken();
   if (token) {
     config.headers.Authorization = tokenHeader(token);
   }
@@ -35,9 +30,9 @@ api.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
-      const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
+      const refreshToken = tokenStorage.getRefreshToken();
       if (!refreshToken) {
-        removeToken();
+        tokenStorage.clearTokens();
 
         return Promise.reject(error);
       }
@@ -49,15 +44,14 @@ api.interceptors.response.use(
         });
 
         // 새 토큰 저장
-        localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
-        localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken);
+        tokenStorage.setTokens(data.accessToken, data.refreshToken);
 
         // 원래 요청 재시도
         originalRequest.headers.Authorization = tokenHeader(data.accessToken);
         return api(originalRequest);
       } catch {
         // 갱신 실패 시 로그아웃
-        removeToken();
+        tokenStorage.clearTokens();
 
         return Promise.reject(error);
       }
