@@ -1,19 +1,20 @@
 import { useEffect } from "react";
-import { Button } from "@/shared";
 
 import { useNavigate } from "react-router-dom";
+
+import { tokenStorage } from "@/lib/storage";
+import { PATHS } from "@/routes/paths";
+import { Button } from "@/shared";
+
 import { useUser } from "../../hooks/useUser";
 
-import { PATHS } from "@/routes/paths";
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "@/lib/constants";
 
 export function UserPage() {
   const { data: user, isLoading, error } = useUser();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem(ACCESS_TOKEN_KEY);
-    localStorage.removeItem(REFRESH_TOKEN_KEY);
+    tokenStorage.clearTokens();
     navigate(PATHS.SIGN_IN);
   };
 

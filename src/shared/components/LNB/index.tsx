@@ -1,6 +1,7 @@
-import { NavLink } from "react-router-dom";
-import { PATHS } from "@/routes/paths";
 import { LayoutDashboard, ListTodo } from "lucide-react";
+import { NavLink } from "react-router-dom";
+
+import { PATHS } from "@/routes/paths";
 
 const navItems = [
   { path: PATHS.HOME, icon: LayoutDashboard, label: "대시보드" },

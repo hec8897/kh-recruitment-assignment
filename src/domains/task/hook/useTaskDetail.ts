@@ -1,17 +1,21 @@
 import { useEffect } from "react";
 
-import { getTaskDetail } from "../api";
-import { useNavigate } from "react-router-dom";
-import { isAxiosError } from "axios";
-
 import { useQuery } from "@tanstack/react-query";
-import { PATHS } from "@/routes/paths";
+import { isAxiosError } from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+
+
 import { QUERY_KEYS } from "@/lib/queryKeys";
+import { PATHS } from "@/routes/paths";
 
-export function useTaskDetail(id: string) {
+import { getTaskDetail } from "../api";
+
+export function useTaskDetail(id?: string) {
   const navigate = useNavigate();
-  const currentPath = window.location.pathname;
+  const location = useLocation();
 
+  const currentPath = location.pathname;
+  
   const NumberId = Number(id);
 
   const query = useQuery({

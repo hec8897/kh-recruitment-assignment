@@ -1,12 +1,13 @@
 import { useState } from "react";
 
-import { Button } from "@/shared";
-import { EmailInput, PassWordInput, ErrorModal } from "../../components";
-
-import { useSignIn } from "../../hooks/useSignIn";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 
-import type { SignInRequest } from "@/types";
+import { Button } from "@/shared";
+
+import { EmailInput, ErrorModal, PassWordInput } from "../../components";
+import { useSignIn } from "../../hooks/useSignIn";
+import { signInSchema, type SignInFormData } from "../../schemas/signInSchema";
 
 const defaultValues = import.meta.env.DEV
   ? {
@@ -23,10 +24,10 @@ export function SignInPage() {
     },
   });
 
-  const form = useForm<SignInRequest>({
-    values: {
-      ...defaultValues,
-    },
+  const form = useForm<SignInFormData>({
+    resolver: zodResolver(signInSchema),
+    defaultValues,
+    mode: "onChange",
   });
 
   const {
@@ -34,7 +35,7 @@ export function SignInPage() {
     formState: { isValid },
   } = form;
 
-  const onSubmit = handleSubmit((data: SignInRequest) => {
+  const onSubmit = handleSubmit((data: SignInFormData) => {
     signIn(data);
   });
 

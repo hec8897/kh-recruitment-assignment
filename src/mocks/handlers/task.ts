@@ -1,8 +1,9 @@
 import { http, HttpResponse } from "msw";
-import { validateToken } from "./auth";
 
-import { deleteTask, tasks } from "./data/mock";
 import type { TaskDetail } from "@/types";
+
+import { validateToken } from "./auth";
+import { deleteTask, tasks } from "./data/mock";
 
 const getTaskDetail = (id: number): TaskDetail | null => {
   const task = tasks.find((t) => t.id === id);

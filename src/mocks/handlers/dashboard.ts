@@ -1,7 +1,9 @@
 import { http, HttpResponse } from "msw";
-import { tasks } from "./data/mock";
 
 import type { DashboardData } from "@/types";
+
+import { tasks } from "./data/mock";
+
 
 const getDashboardData = (): DashboardData => ({
   numOfTask: tasks.length,

@@ -1,20 +1,35 @@
 import { useState } from "react";
 
+import { Trash2 } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 import { DetailDeleteModal } from "./DetailDeleteModal";
-import { Trash2 } from "lucide-react";
 import { useTaskDetail } from "../../hook";
 
 export function TaskDetailPage() {
   const [isOpen, setIsOpen] = useState(false);
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
 
   const { data: task, isLoading, error } = useTaskDetail(id ?? "");
+
+
 
   const handleDelete = () => {
     setIsOpen(true);
   };
+
+
+  if (!id) {
+    return (
+      <div className="flex justify-center items-center h-full">
+        <div className="text-center">
+          <h2 className="text-xl font-bold text-red-500">잘못된 접근입니다</h2>
+          <p className="text-gray-500 mt-2">올바른 Task ID가 필요합니다</p>
+        </div>
+      </div>
+    );
+  }
+
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -33,7 +48,7 @@ export function TaskDetailPage() {
       <DetailDeleteModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        id={id ?? ""}
+        id={id}
       />
       <div className="mb-8">
         <div className="flex justify-between items-center gap-2">

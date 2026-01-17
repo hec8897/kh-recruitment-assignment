@@ -1,16 +1,19 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import { QUERY_KEYS } from "@/lib/queryKeys";
+import { PATHS } from "@/routes/paths";
 
 import { getTasks } from "../api";
-import { useInfiniteQuery } from "@tanstack/react-query";
 
-import { PATHS } from "@/routes/paths";
-import { QUERY_KEYS } from "@/lib/queryKeys";
 
 export function useTasks() {
   const navigate = useNavigate();
-  const currentPath = window.location.pathname;
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const query = useInfiniteQuery({
     queryKey: QUERY_KEYS.tasks,
