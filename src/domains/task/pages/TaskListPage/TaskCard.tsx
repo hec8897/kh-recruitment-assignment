@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 
 import { PATHS } from "@/routes/paths";
@@ -9,7 +10,11 @@ interface TaskCardProps {
   task: Task;
 }
 
-export function TaskCard({ task }: TaskCardProps) {
+/**
+ * 할일 카드 컴포넌트
+ * React.memo로 불필요한 리렌더링 방지
+ */
+export const TaskCard = memo(function TaskCard({ task }: TaskCardProps) {
   return (
     <Link
       to={PATHS.TASK_DETAIL.replace(":id", task.id.toString())}
@@ -22,4 +27,4 @@ export function TaskCard({ task }: TaskCardProps) {
       <p className="truncate">{task.memo}</p>
     </Link>
   );
-}
+});

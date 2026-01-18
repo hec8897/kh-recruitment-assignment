@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -8,15 +8,15 @@ import { Button } from "@/shared";
 
 import { useUser } from "../../hooks/useUser";
 
-
 export function UserPage() {
   const { data: user, isLoading, error } = useUser();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  // 로그아웃 핸들러를 useCallback으로 메모이제이션
+  const handleLogout = useCallback(() => {
     tokenStorage.clearTokens();
     navigate(PATHS.SIGN_IN);
-  };
+  }, [navigate]);
 
   useEffect(() => {
     if (error) {
