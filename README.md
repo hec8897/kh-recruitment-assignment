@@ -20,8 +20,9 @@ npm run lint
 
 **개발 서버:** http://localhost:5173
 
-**개발 환경 자동 로그인:**
-- `.env` 파일에 `VITE_DEV_EMAIL`, `VITE_DEV_PASSWORD` 설정 시 자동으로 필드에 채워짐
+**개발 환경 로그인:**
+- id: test@example.com
+- pw: password123
 
 ---
 
