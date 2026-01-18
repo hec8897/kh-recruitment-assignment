@@ -1,5 +1,7 @@
+import { useCallback } from "react";
+
 import { TaskCard } from "./TaskCard";
-import { useTasks, useIntersectionObserver, useVirtualList } from "../../hook";
+import { useIntersectionObserver, useTasks, useVirtualList } from "../../hook";
 
 const ITEM_HEIGHT = 94 + 16; // TaskCard 높이 (px) + margin-bottom
 
@@ -10,8 +12,13 @@ export function TaskList() {
     count: tasks?.length || 0,
   });
 
+  // fetchNextPage를 useCallback으로 메모이제이션
+  const handleFetchNextPage = useCallback(() => {
+    fetchNextPage();
+  }, [fetchNextPage]);
+
   const ref = useIntersectionObserver({
-    onCallback: fetchNextPage,
+    onCallback: handleFetchNextPage,
     enabled: hasNextPage,
   });
 
