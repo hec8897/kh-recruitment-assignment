@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import { Trash2 } from "lucide-react";
 import { useParams } from "react-router-dom";
@@ -12,12 +12,15 @@ export function TaskDetailPage() {
 
   const { data: task, isLoading, error } = useTaskDetail(id ?? "");
 
-
-
-  const handleDelete = () => {
+  // 삭제 핸들러를 useCallback으로 메모이제이션
+  const handleDelete = useCallback(() => {
     setIsOpen(true);
-  };
+  }, []);
 
+  // 모달 닫기 핸들러를 useCallback으로 메모이제이션
+  const handleCloseModal = useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
   if (!id) {
     return (
@@ -29,7 +32,6 @@ export function TaskDetailPage() {
       </div>
     );
   }
-
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -47,7 +49,7 @@ export function TaskDetailPage() {
     <div>
       <DetailDeleteModal
         isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
+        onClose={handleCloseModal}
         id={id}
       />
       <div className="mb-8">

@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 import clsx from "clsx";
 
 interface DashBoardCardProps {
@@ -6,7 +8,11 @@ interface DashBoardCardProps {
   isBorderRight?: boolean;
 }
 
-export function DashBoardCard({
+/**
+ * 대시보드 카드 컴포넌트
+ * React.memo로 불필요한 리렌더링 방지
+ */
+export const DashBoardCard = memo(function DashBoardCard({
   title,
   count,
   isBorderRight,
@@ -23,4 +29,4 @@ export function DashBoardCard({
       <span className="text-2xl text-gray-500">{count}</span>
     </div>
   );
-}
+});
